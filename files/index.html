@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIBA MEDIA – Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #080808;
+    --dark: #111111;
+    --card: #141414;
+    --border: rgba(255,255,255,0.07);
+    --gold: #C9A84C;
+    --gold-light: #E2C577;
+    --white: #F0EDE8;
+    --muted: rgba(240,237,232,0.45);
+    --ff-display: 'Bebas Neue', sans-serif;
+    --ff-body: 'DM Sans', sans-serif;
+    --ff-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--ff-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 48px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: var(--ff-display);
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-links a.active { border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, #080808 0%, #0e0d0b 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  }
+  .hero-eyebrow {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '──';
+    opacity: .5;
+    margin: 0 12px;
+  }
+  .hero-title {
+    font-family: var(--ff-display);
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: .9;
+    letter-spacing: 6px;
+    position: relative;
+  }
+  .hero-title .outline {
+    -webkit-text-stroke: 1px rgba(240,237,232,0.2);
+    color: transparent;
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    max-width: 400px;
+    position: relative;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--ff-mono); font-size: 10px; letter-spacing: 3px;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: .3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: clamp(42px, 6vw, 72px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 48px;
+  }
+
+  /* ── FILTER TABS ── */
+  .filter-bar {
+    display: flex; gap: 4px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .filter-btn {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none; border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all .2s;
+  }
+  .filter-btn:hover { color: var(--white); }
+  .filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── SERVICE CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+  }
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    background: var(--card);
+  }
+  .card-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.25,.46,.45,.94), filter .5s;
+    filter: brightness(.55) saturate(.8);
+  }
+  .service-card:hover .card-img {
+    transform: scale(1.06);
+    filter: brightness(.7) saturate(1);
+  }
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,.95) 0%, rgba(8,8,8,.2) 50%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 28px 24px;
+    transition: background .4s;
+  }
+  .service-card:hover .card-overlay {
+    background: linear-gradient(to top, rgba(8,8,8,.98) 0%, rgba(8,8,8,.5) 60%, transparent 100%);
+  }
+  .card-tag {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: var(--ff-display);
+    font-size: 30px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .card-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: none; border: 1px solid rgba(255,255,255,0.25);
+    padding: 10px 20px;
+    cursor: pointer;
+    width: fit-content;
+    transition: all .25s;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: opacity .3s, transform .3s, background .25s, border-color .25s;
+  }
+  .service-card:hover .card-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+  }
+  .card-btn svg { width: 14px; height: 14px; }
+
+  /* ── WHAT YOU RECEIVE ── */
+  .receive-section {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .receive-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .feature-item {
+    background: var(--dark);
+    padding: 36px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: background .25s;
+  }
+  .feature-item:hover { background: #161616; }
+  .feature-num {
+    font-family: var(--ff-display);
+    font-size: 48px;
+    color: var(--gold);
+    opacity: .3;
+    line-height: 1;
+    min-width: 48px;
+  }
+  .feature-content {}
+  .feature-name {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 6px;
+    letter-spacing: .5px;
+  }
+  .feature-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── STATS ── */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin: 0 48px;
+    border: 1px solid var(--border);
+  }
+  .stat-item {
+    background: var(--black);
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--ff-display);
+    font-size: 72px;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section {}
+  .testimonials-intro {
+    max-width: 600px;
+    margin-bottom: 56px;
+  }
+  .testimonials-intro p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .testimonial-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px;
+    transition: border-color .25s, background .25s;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(201,168,76,.25);
+    background: #161410;
+  }
+  .stars { color: var(--gold); font-size: 13px; margin-bottom: 16px; }
+  .testimonial-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(240,237,232,.75);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .5px;
+  }
+  .testimonial-role {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: var(--ff-mono);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  .cta-title {
+    font-family: var(--ff-display);
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: 4px;
+    line-height: .95;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .cta-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    position: relative;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    position: relative;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-logo {
+    font-family: var(--ff-display);
+    font-size: 22px;
+    letter-spacing: 4px;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--ff-mono);
+    letter-spacing: 1px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    font-family: var(--ff-mono);
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 72px 20px; }
+    .stats-section { margin: 0 20px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DIBA MEDIA</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="index.html" class="active">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">Professional Video Production</div>
+  <h1 class="hero-title">
+    <div>OUR</div>
+    <div class="outline">SERVICES</div>
+  </h1>
+  <p class="hero-sub">Cinematic editing crafted to make your story unforgettable.</p>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding-top: 60px;">
+  <div class="fade-in">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">VIDEO EDITING<br>PACKAGES</h2>
+  </div>
+
+  <div class="filter-bar fade-in">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All Services</button>
+    <button class="filter-btn" onclick="filterCards('video', this)">Video Editing</button>
+    <button class="filter-btn" onclick="filterCards('photo', this)">Photo Editing</button>
+    <button class="filter-btn" onclick="filterCards('motion', this)">Motion Graphics</button>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid">
+    <div class="service-card fade-in" data-category="video">
+      <img class="card-img" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80" alt="Basic Style">
+      <div class="card-overlay">
+        <div class="card-tag">Video Editing</div>
+        <div class="card-title">BASIC STYLE</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="service-card fade-in" data-category="video">
+      <img class="card-img" src="https://images.unsplash.com/photo-1576158113928-4c240eaaf360?w=600&q=80" alt="Standard Style">
+      <div class="card-overlay">
+        <div class="card-tag">Video Editing</div>
+        <div class="card-title">STANDARD STYLE</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="service-card fade-in" data-category="video">
+      <img class="card-img" src="https://images.unsplash.com/photo-1601506521793-dc748fc80b67?w=600&q=80" alt="Premium Style">
+      <div class="card-overlay">
+        <div class="card-tag">Video Editing</div>
+        <div class="card-title">PREMIUM STYLE</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="service-card fade-in" data-category="video">
+      <img class="card-img" src="https://images.unsplash.com/photo-1505483531331-fc0f9f2f5aa5?w=600&q=80" alt="Luxury Style">
+      <div class="card-overlay">
+        <div class="card-tag">Video Editing</div>
+        <div class="card-title">LUXURY VIDEO</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="service-card fade-in" data-category="photo">
+      <img class="card-img" src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80" alt="Photo Retouch">
+      <div class="card-overlay">
+        <div class="card-tag">Photo Editing</div>
+        <div class="card-title">PHOTO RETOUCH</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="service-card fade-in" data-category="motion">
+      <img class="card-img" src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Motion Graphics">
+      <div class="card-overlay">
+        <div class="card-tag">Motion Graphics</div>
+        <div class="card-title">MOTION DESIGN</div>
+        <button class="card-btn">
+          Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item fade-in">
+    <div class="stat-num">2K+</div>
+    <div class="stat-label">Satisfied Clients</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">10K+</div>
+    <div class="stat-label">Jobs Edited</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">5★</div>
+    <div class="stat-label">Avg. Rating</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">48H</div>
+    <div class="stat-label">Delivery Time</div>
+  </div>
+</div>
+
+<!-- WHAT YOU RECEIVE -->
+<section class="receive-section">
+  <div class="receive-header fade-in">
+    <div>
+      <div class="section-label">Included in every package</div>
+      <h2 class="section-title">WHAT DO YOU<br>RECEIVE?</h2>
+    </div>
+    <p style="max-width:340px; font-size:14px; color:var(--muted); line-height:1.8;">"We also offer individualized service and create designs that reflect your unique style."</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-item fade-in">
+      <div class="feature-num">01</div>
+      <div class="feature-content">
+        <div class="feature-name">Color Grading</div>
+        <div class="feature-desc">Cinematic color treatment tailored to your brand aesthetic and mood.</div>
+      </div>
+    </div>
+    <div class="feature-item fade-in">
+      <div class="feature-num">02</div>
+      <div class="feature-content">
+        <div class="feature-name">Speed Ramps</div>
+        <div class="feature-desc">Dynamic slow-motion and speed effects to create emotional impact.</div>
+      </div>
+    </div>
+    <div class="feature-item fade-in">
+      <div class="feature-num">03</div>
+      <div class="feature-content">
+        <div class="feature-name">Location Overlay</div>
+        <div class="feature-desc">Custom animated address and location tags to highlight your venue.</div>
+      </div>
+    </div>
+    <div class="feature-item fade-in">
+      <div class="feature-num">04</div>
+      <div class="feature-content">
+        <div class="feature-name">3D Tracking Effects</div>
+        <div class="feature-desc">Advanced motion tracking to pin graphics seamlessly to your footage.</div>
+      </div>
+    </div>
+    <div class="feature-item fade-in">
+      <div class="feature-num">05</div>
+      <div class="feature-content">
+        <div class="feature-name">Add-On Effects</div>
+        <div class="feature-desc">Particle effects, light leaks, and visual enhancements to elevate the edit.</div>
+      </div>
+    </div>
+    <div class="feature-item fade-in">
+      <div class="feature-num">06</div>
+      <div class="feature-content">
+        <div class="feature-name">Borderline Styling</div>
+        <div class="feature-desc">Signature frame borders and custom aesthetic overlays unique to your brand.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-intro fade-in">
+    <div class="section-label">Client reviews</div>
+    <h2 class="section-title">WHO LOVES<br>OUR WORK</h2>
+    <p>Our goal is to create a product and service that you're satisfied with and use every day. We really listen to what our clients have to say.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I really like the video you made. It looks amazing — exactly the vision I had in my head."</p>
+      <div class="testimonial-author">Jenn Lueck</div>
+      <div class="testimonial-role">Wedding Client</div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"My videos look professional and sharp. Service was quick and the team was incredibly helpful."</p>
+      <div class="testimonial-author">William Anthony Stahl</div>
+      <div class="testimonial-role">Real Estate Agent</div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"DIBA MEDIA has completely transformed my business and helped me reach levels of quality I never imagined."</p>
+      <div class="testimonial-author">Christa Maxson</div>
+      <div class="testimonial-role">Photography Studio</div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"A game-changer for my business. Their expertise and dedication have elevated my operations to new heights."</p>
+      <div class="testimonial-author">Jacob McNeil</div>
+      <div class="testimonial-role">Content Creator</div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Amazing team! Fast turnaround, excellent communication, and the final product was beyond my expectations."</p>
+      <div class="testimonial-author">Yazan Arnous</div>
+      <div class="testimonial-role">Brand Director</div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Well done, I love your work! Will definitely be coming back for every project going forward."</p>
+      <div class="testimonial-author">Joshua Birge</div>
+      <div class="testimonial-role">Event Organizer</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="fade-in">
+    <h2 class="cta-title">READY TO<br>WORK WITH US?</h2>
+    <p class="cta-sub">Trusted by over 2,000+ clients worldwide. Your success is our heartbeat.</p>
+    <button class="btn-primary">
+      Get in Touch
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DIBA MEDIA</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Portfolio</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Nova Media Co., Ltd.</div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Filter
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.service-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.category === cat;
+      card.style.display = show ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
