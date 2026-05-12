@@ -17,6 +17,7 @@
   }
   html { scroll-behavior: smooth; }
   body { background: var(--black); color: var(--white); font-family: var(--ff-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent); backdrop-filter: blur(4px); }
   .nav-logo { font-family: var(--ff-display); font-size: 26px; letter-spacing: 4px; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--gold); }
@@ -24,6 +25,7 @@
   .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
   .nav-links a.active { border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
   .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%), linear-gradient(180deg, #080808 0%, #0e0d0b 100%); }
   .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%); }
@@ -31,10 +33,13 @@
   .hero-eyebrow::before, .hero-eyebrow::after { content: '──'; opacity: .5; margin: 0 12px; }
   .hero-title { font-family: var(--ff-display); font-size: clamp(72px, 12vw, 160px); line-height: .9; letter-spacing: 6px; position: relative; }
   .hero-title .outline { -webkit-text-stroke: 1px rgba(240,237,232,0.2); color: transparent; }
-  .hero-sub { margin-top: 28px; font-size: 14px; letter-spacing: 1px; color: var(--muted); max-width: 440px; position: relative; }
+  .hero-sub { margin-top: 28px; font-size: 14px; letter-spacing: 1px; color: var(--muted); max-width: 500px; position: relative; line-height: 1.8; }
+
   section { padding: 100px 48px; }
   .section-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
   .section-title { font-family: var(--ff-display); font-size: clamp(42px, 6vw, 72px); letter-spacing: 3px; line-height: 1; margin-bottom: 48px; }
+
+  /* Story */
   .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
   .story-img { position: relative; aspect-ratio: 4/5; overflow: hidden; }
   .story-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.7) saturate(.8); }
@@ -43,13 +48,29 @@
   .story-text p { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
   .story-text strong { color: var(--white); font-weight: 500; }
   .gold-line { width: 48px; height: 2px; background: var(--gold); margin-bottom: 28px; }
-  .values-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--border); }
-  .value-item { background: var(--dark); padding: 40px 32px; transition: background .25s; }
-  .value-item:hover { background: #161616; }
-  .value-icon { font-size: 28px; margin-bottom: 16px; }
-  .value-name { font-family: var(--ff-display); font-size: 26px; letter-spacing: 2px; margin-bottom: 10px; }
-  .value-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* Quote banner */
+  .quote-banner { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 48px; text-align: center; }
+  .quote-text { font-family: var(--ff-display); font-size: clamp(24px, 4vw, 42px); letter-spacing: 2px; line-height: 1.2; max-width: 900px; margin: 0 auto 20px; }
+  .quote-text span { color: var(--gold); }
+  .quote-sub { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+
+  /* Stats */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat-item { background: var(--black); padding: 48px 40px; text-align: center; }
+  .stat-num { font-family: var(--ff-display); font-size: 72px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
+  .stat-label { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+
+  /* Why us */
+  .why-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); }
+  .why-item { background: var(--dark); padding: 40px 32px; transition: background .25s; }
+  .why-item:hover { background: #161616; }
+  .why-icon { font-family: var(--ff-display); font-size: 40px; color: var(--gold); opacity: .5; margin-bottom: 16px; line-height: 1; }
+  .why-name { font-family: var(--ff-display); font-size: 24px; letter-spacing: 2px; margin-bottom: 10px; }
+  .why-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
+
+  /* Team */
   .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
   .team-card { position: relative; overflow: hidden; aspect-ratio: 3/4; background: var(--card); }
   .team-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(.7); transition: transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s; }
@@ -57,16 +78,15 @@
   .team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,.95) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; }
   .team-name { font-family: var(--ff-display); font-size: 24px; letter-spacing: 2px; margin-bottom: 4px; }
   .team-role { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .stat-item { background: var(--black); padding: 48px 40px; text-align: center; }
-  .stat-num { font-family: var(--ff-display); font-size: 72px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
-  .stat-label { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+
+  /* CTA */
   .cta-section { text-align: center; padding: 120px 48px; position: relative; overflow: hidden; }
   .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%); }
   .cta-title { font-family: var(--ff-display); font-size: clamp(52px, 8vw, 96px); letter-spacing: 4px; line-height: .95; margin-bottom: 28px; position: relative; }
-  .cta-sub { color: var(--muted); font-size: 15px; max-width: 480px; margin: 0 auto 40px; position: relative; }
+  .cta-sub { color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto 40px; position: relative; line-height: 1.8; }
   .btn-primary { display: inline-flex; align-items: center; gap: 12px; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--black); background: var(--gold); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
   footer { border-top: 1px solid var(--border); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
   .footer-logo { font-family: var(--ff-display); font-size: 22px; letter-spacing: 4px; }
   .footer-logo span { color: var(--gold); }
@@ -74,12 +94,22 @@
   .footer-links { display: flex; gap: 24px; }
   .footer-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; font-family: var(--ff-mono); transition: color .2s; }
   .footer-links a:hover { color: var(--gold); }
+
   .fade-in { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
-  @media (max-width: 768px) { nav { padding: 16px 20px; } .nav-links { display: none; } section { padding: 72px 20px; } .story-section { grid-template-columns: 1fr; } .stats-row { grid-template-columns: 1fr 1fr; } footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; } }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; } .nav-links { display: none; }
+    section { padding: 72px 20px; }
+    .story-section { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .quote-banner { padding: 48px 20px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo">DIBA<span>.</span>MEDIA</a>
   <ul class="nav-links">
@@ -90,82 +120,154 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-eyebrow">Our Story</div>
-  <h1 class="hero-title"><div>ABOUT</div><div class="outline">US</div></h1>
-  <p class="hero-sub">The creative team behind every stunning frame.</p>
+  <div class="hero-eyebrow">Who We Are</div>
+  <h1 class="hero-title">
+    <div>ABOUT</div>
+    <div class="outline">US</div>
+  </h1>
+  <p class="hero-sub">The leading real estate video editing studio — headquartered in Vietnam, trusted by agents and photographers worldwide.</p>
 </section>
 
+<!-- STORY -->
 <section>
   <div class="story-section fade-in">
     <div class="story-img">
-      <img src="https://images.unsplash.com/photo-1536240478700-b869ad10a2eb?w=800&q=80" alt="DIBA MEDIA Studio">
+      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80" alt="DIBA MEDIA Studio">
       <div class="story-accent"></div>
     </div>
     <div class="story-text">
-      <div class="section-label">Who We Are</div>
-      <h2 class="section-title" style="font-size:clamp(36px,5vw,60px)">OUR<br>STORY</h2>
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title" style="font-size:clamp(36px,5vw,60px)">WE ARE<br>DIBA MEDIA</h2>
       <div class="gold-line"></div>
-      <p><strong>DIBA MEDIA</strong> is a professional video and photo editing studio built with one purpose — delivering cinematic, high-quality visuals that leave a lasting impression.</p>
-      <p>We believe every story deserves to be told beautifully. From romantic wedding films to sharp commercial reels, our team brings the same passion and precision to every single project.</p>
-      <p>With over <strong>10,000+ completed projects</strong> and <strong>2,000+ satisfied clients</strong> worldwide, we are proud to be the trusted post-production partner for creators across the globe.</p>
+      <p><strong>DIBA MEDIA</strong> is a professional real estate video editing company headquartered in Vietnam, built to serve agents, photographers, and videographers across the globe.</p>
+      <p>We understand what sells a property — light, movement, and emotion. Our team specializes in transforming raw footage into polished, cinematic property videos that capture attention, build trust, and drive results for your listings.</p>
+      <p>From luxury estates to residential listings, we deliver <strong>fast turnarounds, consistent quality, and 24/7 availability</strong> — because in real estate, timing is everything. We are here to help your business grow and thrive in a competitive market.</p>
     </div>
   </div>
 </section>
 
-<div class="stats-row">
-  <div class="stat-item fade-in"><div class="stat-num">2K+</div><div class="stat-label">Happy Clients</div></div>
-  <div class="stat-item fade-in"><div class="stat-num">10K+</div><div class="stat-label">Projects Done</div></div>
-  <div class="stat-item fade-in"><div class="stat-num">5★</div><div class="stat-label">Avg. Rating</div></div>
-  <div class="stat-item fade-in"><div class="stat-num">48H</div><div class="stat-label">Delivery Time</div></div>
+<!-- QUOTE BANNER -->
+<div class="quote-banner fade-in">
+  <div class="quote-text">"Your success is <span>our heartbeat.</span> We don't stop until you're 100% thrilled."</div>
+  <div class="quote-sub">— The DIBA MEDIA Promise</div>
 </div>
 
-<section class="values-section">
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item fade-in"><div class="stat-num">2K+</div><div class="stat-label">Satisfied Clients</div></div>
+  <div class="stat-item fade-in"><div class="stat-num">10K+</div><div class="stat-label">Videos Edited</div></div>
+  <div class="stat-item fade-in"><div class="stat-num">24/7</div><div class="stat-label">Available</div></div>
+  <div class="stat-item fade-in"><div class="stat-num">48H</div><div class="stat-label">Max Delivery</div></div>
+</div>
+
+<!-- WHY US -->
+<section class="why-section">
   <div class="fade-in">
-    <div class="section-label">Core Values</div>
-    <h2 class="section-title">WHAT WE<br>STAND FOR</h2>
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">WHAT MAKES US<br>DIFFERENT</h2>
   </div>
-  <div class="values-grid">
-    <div class="value-item fade-in"><div class="value-icon">✦</div><div class="value-name">QUALITY</div><div class="value-desc">Every frame is crafted with meticulous attention to detail. We never settle for anything less than our best.</div></div>
-    <div class="value-item fade-in"><div class="value-icon">◈</div><div class="value-name">CREATIVITY</div><div class="value-desc">We constantly push for fresh perspectives and new styles so each video feels unique and unforgettable.</div></div>
-    <div class="value-item fade-in"><div class="value-icon">⬡</div><div class="value-name">DEDICATION</div><div class="value-desc">Our clients are at the center of everything. We listen, understand, and deliver exactly what you envision.</div></div>
-    <div class="value-item fade-in"><div class="value-icon">◎</div><div class="value-name">ON TIME</div><div class="value-desc">We commit to delivering on schedule. Your time is valuable — and we respect that unconditionally.</div></div>
+  <div class="why-grid">
+    <div class="why-item fade-in">
+      <div class="why-icon">01</div>
+      <div class="why-name">PROMPT DELIVERY</div>
+      <div class="why-desc">We guarantee delivery within 8–24 hours for standard edits. Your listings go live faster, and you never miss a deadline.</div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-icon">02</div>
+      <div class="why-name">24/7 SERVICE</div>
+      <div class="why-desc">Our team operates around the clock across time zones. Send us footage any time — we'll be ready to edit.</div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-icon">03</div>
+      <div class="why-name">DISTINCTIVENESS</div>
+      <div class="why-desc">Every property has a unique story. We craft edits with a cinematic eye that makes your listings stand out from the competition.</div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-icon">04</div>
+      <div class="why-name">CONSISTENCY</div>
+      <div class="why-desc">Whether it's your first project or your five hundredth, you receive the same high standard of quality — every single time.</div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-icon">05</div>
+      <div class="why-name">FREE REVISION</div>
+      <div class="why-desc">Your first revision is always on us. We work until you're completely satisfied with the final result.</div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-icon">06</div>
+      <div class="why-name">FLEXIBLE PAYMENT</div>
+      <div class="why-desc">We accept PayPal and offer daily or weekly billing for returning clients — making the workflow as smooth as possible.</div>
+    </div>
   </div>
 </section>
 
+<!-- TEAM -->
 <section>
   <div class="fade-in">
-    <div class="section-label">The People</div>
+    <div class="section-label">The People Behind the Edits</div>
     <h2 class="section-title">MEET THE<br>TEAM</h2>
   </div>
   <div class="team-grid">
-    <div class="team-card fade-in"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt=""><div class="team-overlay"><div class="team-name">ALEX NGUYEN</div><div class="team-role">Founder & Lead Editor</div></div></div>
-    <div class="team-card fade-in"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&q=80" alt=""><div class="team-overlay"><div class="team-name">JAMES TRAN</div><div class="team-role">Senior Colorist</div></div></div>
-    <div class="team-card fade-in"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80" alt=""><div class="team-overlay"><div class="team-name">SOPHIA LE</div><div class="team-role">Motion Designer</div></div></div>
-    <div class="team-card fade-in"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt=""><div class="team-overlay"><div class="team-name">DANIEL PHAM</div><div class="team-role">Photo Editor</div></div></div>
+    <div class="team-card fade-in">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="">
+      <div class="team-overlay">
+        <div class="team-name">ALEX NGUYEN</div>
+        <div class="team-role">Founder & Lead Editor</div>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&q=80" alt="">
+      <div class="team-overlay">
+        <div class="team-name">JAMES TRAN</div>
+        <div class="team-role">Senior Colorist</div>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80" alt="">
+      <div class="team-overlay">
+        <div class="team-name">SOPHIA LE</div>
+        <div class="team-role">Motion Designer</div>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="">
+      <div class="team-overlay">
+        <div class="team-name">DANIEL PHAM</div>
+        <div class="team-role">Video Editor</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg"></div>
   <div class="fade-in">
-    <h2 class="cta-title">READY TO<br>COLLABORATE?</h2>
-    <p class="cta-sub">Let us turn your story into a film worth remembering.</p>
+    <h2 class="cta-title">READY TO<br>WORK WITH US?</h2>
+    <p class="cta-sub">Trusted by real estate professionals worldwide. Send us your footage today and see the difference quality editing makes for your listings.</p>
     <a href="contact.html" class="btn-primary">Get in Touch →</a>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">DIBA<span>.</span>MEDIA</div>
-  <div class="footer-links"><a href="about.html">About</a><a href="index.html">Services</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Contact</a></div>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="index.html">Services</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="contact.html">Contact</a>
+  </div>
   <div class="footer-copy">© 2026 DIBA Media Co., Ltd.</div>
 </footer>
 
 <script>
-  const obs = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); obs.unobserve(e.target); } }); }, {threshold:0.1,rootMargin:'0px 0px -60px 0px'});
-  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
