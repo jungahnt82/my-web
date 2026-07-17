@@ -440,6 +440,23 @@
     .stats-section { margin: 0 20px; }
     footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
   }
+
+  /* Autoplay video card */
+  .card-video-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .card-video-bg iframe { position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; transform: translate(-50%, -50%); border: none; filter: brightness(.55) saturate(.8); transition: filter .5s; }
+  .service-card:hover .card-video-bg iframe { filter: brightness(.72) saturate(1); }
+  .card-play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(201,168,76,0.85);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10;
+    transition: transform .2s, background .2s;
+    opacity: 0;
+  }
+  .service-card:hover .card-play-btn { opacity: 1; }
+  .card-play-btn:hover { transform: translate(-50%, -50%) scale(1.12); background: rgba(201,168,76,1); }
 </style>
 </head>
 <body>
@@ -485,13 +502,19 @@
   </div>
 
   <div class="cards-grid" id="cardsGrid">
-
     <div class="service-card fade-in" data-category="video">
-      <div class="card-iframe-wrap" onclick="window.open('https://www.youtube.com/watch?v=oJ46C5eqNpo','_blank')" style="cursor:pointer">
-        <img src="https://img.youtube.com/vi/oJ46C5eqNpo/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.8);transition:filter .5s" onmouseover="this.style.filter='brightness(.75) saturate(1)'" onmouseout="this.style.filter='brightness(.55) saturate(.8)'">
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(201,168,76,0.85);display:flex;align-items:center;justify-content:center;transition:transform .2s" onmouseover="this.style.transform='translate(-50%,-50%) scale(1.1)'" onmouseout="this.style.transform='translate(-50%,-50%) scale(1)'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+      <!-- Autoplay background iframe -->
+      <div class="card-video-bg">
+        <iframe
+          src="https://www.youtube.com/embed/oJ46C5eqNpo?autoplay=1&mute=1&loop=1&playlist=oJ46C5eqNpo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
+          allow="autoplay; encrypted-media"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <!-- Play button opens YouTube in new tab -->
+      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=oJ46C5eqNpo','_blank')">
+        <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
@@ -499,13 +522,19 @@
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-
     <div class="service-card fade-in" data-category="video">
-      <div class="card-iframe-wrap" onclick="window.open('https://www.youtube.com/watch?v=QPuhbXF5DRM','_blank')" style="cursor:pointer">
-        <img src="https://img.youtube.com/vi/QPuhbXF5DRM/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.8);transition:filter .5s" onmouseover="this.style.filter='brightness(.75) saturate(1)'" onmouseout="this.style.filter='brightness(.55) saturate(.8)'">
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(201,168,76,0.85);display:flex;align-items:center;justify-content:center;transition:transform .2s" onmouseover="this.style.transform='translate(-50%,-50%) scale(1.1)'" onmouseout="this.style.transform='translate(-50%,-50%) scale(1)'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+      <!-- Autoplay background iframe -->
+      <div class="card-video-bg">
+        <iframe
+          src="https://www.youtube.com/embed/QPuhbXF5DRM?autoplay=1&mute=1&loop=1&playlist=QPuhbXF5DRM&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
+          allow="autoplay; encrypted-media"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <!-- Play button opens YouTube in new tab -->
+      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=QPuhbXF5DRM','_blank')">
+        <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
@@ -513,13 +542,19 @@
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-
     <div class="service-card fade-in" data-category="video">
-      <div class="card-iframe-wrap" onclick="window.open('https://www.youtube.com/watch?v=jEX2y0xW57w','_blank')" style="cursor:pointer">
-        <img src="https://img.youtube.com/vi/jEX2y0xW57w/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.8);transition:filter .5s" onmouseover="this.style.filter='brightness(.75) saturate(1)'" onmouseout="this.style.filter='brightness(.55) saturate(.8)'">
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(201,168,76,0.85);display:flex;align-items:center;justify-content:center;transition:transform .2s" onmouseover="this.style.transform='translate(-50%,-50%) scale(1.1)'" onmouseout="this.style.transform='translate(-50%,-50%) scale(1)'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+      <!-- Autoplay background iframe -->
+      <div class="card-video-bg">
+        <iframe
+          src="https://www.youtube.com/embed/jEX2y0xW57w?autoplay=1&mute=1&loop=1&playlist=jEX2y0xW57w&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
+          allow="autoplay; encrypted-media"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <!-- Play button opens YouTube in new tab -->
+      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=jEX2y0xW57w','_blank')">
+        <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
@@ -527,7 +562,6 @@
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-
   </div>
 
 <!-- WHAT YOU RECEIVE -->
