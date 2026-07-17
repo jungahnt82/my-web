@@ -123,15 +123,17 @@
   /* ── SERVICE CARDS ── */
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    width: 100%;
   }
   .service-card {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 3/4;
+    aspect-ratio: 16/10;
     cursor: pointer;
     background: var(--card);
+    width: 100%;
   }
   .card-img {
     width: 100%; height: 100%;
@@ -457,6 +459,28 @@
   }
   .service-card:hover .card-play-btn { opacity: 1; }
   .card-play-btn:hover { transform: translate(-50%, -50%) scale(1.12); background: rgba(201,168,76,1); }
+
+  /* Video Modal */
+  .yt-modal-backdrop {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.92);
+    align-items: center; justify-content: center;
+  }
+  .yt-modal-backdrop.open { display: flex; }
+  .yt-modal {
+    position: relative; width: 90vw; max-width: 1000px;
+    aspect-ratio: 16/9; background: #000;
+  }
+  .yt-modal iframe { width: 100%; height: 100%; border: none; }
+  .yt-modal-close {
+    position: absolute; top: -44px; right: 0;
+    font-family: var(--ff-mono); font-size: 12px; letter-spacing: 2px;
+    color: var(--muted); background: none; border: none;
+    cursor: pointer; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    transition: color .2s;
+  }
+  .yt-modal-close:hover { color: var(--gold); }
 </style>
 </head>
 <body>
@@ -503,17 +527,14 @@
 
   <div class="cards-grid" id="cardsGrid">
     <div class="service-card fade-in" data-category="video">
-      <!-- Autoplay background iframe -->
       <div class="card-video-bg">
         <iframe
           src="https://www.youtube.com/embed/oJ46C5eqNpo?autoplay=1&mute=1&loop=1&playlist=oJ46C5eqNpo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
           allow="autoplay; encrypted-media"
           frameborder="0"
-          allowfullscreen
         ></iframe>
       </div>
-      <!-- Play button opens YouTube in new tab -->
-      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=oJ46C5eqNpo','_blank')">
+      <div class="card-play-btn" onclick="openModal('oJ46C5eqNpo')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -523,17 +544,14 @@
       </div>
     </div>
     <div class="service-card fade-in" data-category="video">
-      <!-- Autoplay background iframe -->
       <div class="card-video-bg">
         <iframe
           src="https://www.youtube.com/embed/QPuhbXF5DRM?autoplay=1&mute=1&loop=1&playlist=QPuhbXF5DRM&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
           allow="autoplay; encrypted-media"
           frameborder="0"
-          allowfullscreen
         ></iframe>
       </div>
-      <!-- Play button opens YouTube in new tab -->
-      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=QPuhbXF5DRM','_blank')">
+      <div class="card-play-btn" onclick="openModal('QPuhbXF5DRM')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -543,17 +561,14 @@
       </div>
     </div>
     <div class="service-card fade-in" data-category="video">
-      <!-- Autoplay background iframe -->
       <div class="card-video-bg">
         <iframe
           src="https://www.youtube.com/embed/jEX2y0xW57w?autoplay=1&mute=1&loop=1&playlist=jEX2y0xW57w&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
           allow="autoplay; encrypted-media"
           frameborder="0"
-          allowfullscreen
         ></iframe>
       </div>
-      <!-- Play button opens YouTube in new tab -->
-      <div class="card-play-btn" onclick="window.open('https://www.youtube.com/watch?v=jEX2y0xW57w','_blank')">
+      <div class="card-play-btn" onclick="openModal('jEX2y0xW57w')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -563,6 +578,14 @@
       </div>
     </div>
   </div>
+
+<!-- MODAL -->
+<div class="yt-modal-backdrop" id="ytModal" onclick="closeModal(event)">
+  <div class="yt-modal" id="ytModalInner">
+    <button class="yt-modal-close" onclick="closeModal()">✕ Close</button>
+    <iframe id="ytModalIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
 
 <!-- WHAT YOU RECEIVE -->
 <section class="receive-section">
@@ -713,6 +736,23 @@
       card.style.display = show ? 'block' : 'none';
     });
   }
+
+  function openModal(videoId) {
+    document.getElementById('ytModalIframe').src =
+      'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+    document.getElementById('ytModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e && e.target !== document.getElementById('ytModal') && !e.target.classList.contains('yt-modal-close')) return;
+    document.getElementById('ytModal').classList.remove('open');
+    document.getElementById('ytModalIframe').src = '';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal({ target: document.getElementById('ytModal') });
+  });
+
 </script>
 </body>
 </html>
