@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIBA MEDIA – Services</title>
+<title>ELLIE MEDIA – Services</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -143,6 +143,31 @@
     transform: scale(1.06);
     filter: brightness(.7) saturate(1);
   }
+  /* Video card */
+  .card-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(.55) saturate(.8);
+    transition: filter .5s;
+  }
+  .service-card:hover .card-video {
+    filter: brightness(.72) saturate(1);
+  }
+  .card-play {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .3s;
+  }
+  .card-play svg { width: 14px; height: 14px; fill: var(--gold); margin-left: 2px; }
+  .service-card:hover .card-play { opacity: 1; }
+  /* YouTube iframe in card */
+  .card-iframe-wrap { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+  .card-iframe-wrap iframe { position: absolute; top: 50%; left: 50%; width: 180%; height: 180%; transform: translate(-50%, -50%); border: none; filter: brightness(.55) saturate(.8); transition: filter .5s; }
+  .service-card:hover .card-iframe-wrap iframe { filter: brightness(.72) saturate(1); }
   .card-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(8,8,8,.95) 0%, rgba(8,8,8,.2) 50%, transparent 100%);
@@ -421,7 +446,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">DIBA MEDIA</a>
+  <a href="#" class="nav-logo">ELLIE MEDIA</a>
   <ul class="nav-links">
     <li><a href="about.html">About Us</a></li>
     <li><a href="index.html" class="active">Services</a></li>
@@ -431,11 +456,11 @@
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=85" alt="Real estate video editing">
+  <img class="hero-img" src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Luxury real estate property">
   <div class="hero-overlay"></div>
   <div class="hero-line-top"></div>
   <div class="hero-line-bot"></div>
-  <div class="hero-welcome">WELCOME TO DIBA MEDIA</div>
+  <div class="hero-welcome">WELCOME TO ELLIE MEDIA</div>
   <div class="hero-eyebrow">Professional Video Editing</div>
   <h1 class="hero-title">
     <div>OUR</div>
@@ -457,75 +482,47 @@
 
   <div class="filter-bar fade-in">
     <button class="filter-btn active" onclick="filterCards('all', this)">All Services</button>
-    <button class="filter-btn" onclick="filterCards('video', this)">Video Editing</button>
   </div>
 
   <div class="cards-grid" id="cardsGrid">
+
     <div class="service-card fade-in" data-category="video">
-      <img class="card-img" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80" alt="Basic Style">
+      <div class="card-iframe-wrap">
+        <iframe src="https://www.youtube.com/embed/oJ46C5eqNpo?autoplay=1&mute=1&loop=1&playlist=oJ46C5eqNpo&controls=0&showinfo=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
         <div class="card-title">BASIC STYLE</div>
-        <button class="card-btn">
-          Order Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+        <button class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
+
     <div class="service-card fade-in" data-category="video">
-      <img class="card-img" src="https://images.unsplash.com/photo-1576158113928-4c240eaaf360?w=600&q=80" alt="Standard Style">
-      <div class="card-overlay">
-        <div class="card-tag">Video Editing</div>
-        <div class="card-title">STANDARD STYLE</div>
-        <button class="card-btn">
-          Order Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+      <div class="card-iframe-wrap">
+        <iframe src="https://www.youtube.com/embed/QPuhbXF5DRM?autoplay=1&mute=1&loop=1&playlist=QPuhbXF5DRM&controls=0&showinfo=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
-    </div>
-    <div class="service-card fade-in" data-category="video">
-      <img class="card-img" src="https://images.unsplash.com/photo-1601506521793-dc748fc80b67?w=600&q=80" alt="Premium Style">
+      <div class="card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
         <div class="card-title">PREMIUM STYLE</div>
-        <button class="card-btn">
-          Order Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+        <button class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
+
     <div class="service-card fade-in" data-category="video">
-      <img class="card-img" src="https://images.unsplash.com/photo-1505483531331-fc0f9f2f5aa5?w=600&q=80" alt="Luxury Style">
+      <div class="card-iframe-wrap">
+        <iframe src="https://www.youtube.com/embed/jEX2y0xW57w?autoplay=1&mute=1&loop=1&playlist=jEX2y0xW57w&controls=0&showinfo=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
         <div class="card-title">LUXURY VIDEO</div>
-        <button class="card-btn">
-          Order Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+        <button class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
     </div>
-</section>
 
-<!-- STATS -->
-<div class="stats-section">
-  <div class="stat-item fade-in">
-    <div class="stat-num">2K+</div>
-    <div class="stat-label">Satisfied Clients</div>
   </div>
-  <div class="stat-item fade-in">
-    <div class="stat-num">10K+</div>
-    <div class="stat-label">Jobs Edited</div>
-  </div>
-  <div class="stat-item fade-in">
-    <div class="stat-num">5★</div>
-    <div class="stat-label">Avg. Rating</div>
-  </div>
-  <div class="stat-item fade-in">
-    <div class="stat-num">48H</div>
-    <div class="stat-label">Delivery Time</div>
-  </div>
-</div>
 
 <!-- WHAT YOU RECEIVE -->
 <section class="receive-section">
@@ -604,7 +601,7 @@
     </div>
     <div class="testimonial-card fade-in">
       <div class="stars">★★★★★</div>
-      <p class="testimonial-text">"DIBA MEDIA has completely transformed my business and helped me reach levels of quality I never imagined."</p>
+      <p class="testimonial-text">"ELLIE MEDIA has completely transformed my business and helped me reach levels of quality I never imagined."</p>
       <div class="testimonial-author">Christa Maxson</div>
       <div class="testimonial-role">Photography Studio</div>
     </div>
@@ -644,7 +641,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">DIBA MEDIA</div>
+  <div class="footer-logo">ELLIE MEDIA</div>
   <div class="footer-links">
     <a href="#">About</a>
     <a href="#">Services</a>
