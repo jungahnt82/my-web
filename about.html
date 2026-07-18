@@ -6,154 +6,177 @@
 <title>ELLIE MEDIA – About Us</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --black: #080808; --dark: #111111; --card: #141414;
-    --border: rgba(255,255,255,0.07); --gold: #C9A84C; --gold-light: #E2C577;
-    --white: #F0EDE8; --muted: rgba(240,237,232,0.45);
-    --ff-display: 'Bebas Neue', sans-serif;
-    --ff-body: 'DM Sans', sans-serif;
-    --ff-mono: 'DM Mono', monospace;
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--white); font-family: var(--ff-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #F5F2ED; --bg2: #EDEAE4; --bg3: #E3DFD8;
+  --card: #FFFFFF; --border: rgba(0,0,0,0.09);
+  --gold: #B8922A; --gold-lt: #D4AB45;
+  --ink: #1A1714; --ink2: #3D3830; --muted: rgba(26,23,20,0.45);
+  --ff-display: 'Bebas Neue', sans-serif;
+  --ff-body: 'DM Sans', sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--ff-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent); backdrop-filter: blur(4px); }
-  .nav-logo { font-family: var(--ff-display); font-size: 26px; letter-spacing: 4px; color: var(--white); text-decoration: none; }
-  .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-links a.active { border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(245,242,237,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: box-shadow .3s; }
+nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+.nav-logo { font-family: var(--ff-display); font-size: 28px; letter-spacing: 5px; color: var(--ink); text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+.nav-mobile { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(245,242,237,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 24px 28px; z-index: 199; flex-direction: column; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { font-size: 15px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); transition: color .2s; }
+.nav-mobile a.active, .nav-mobile a:hover { color: var(--gold); }
 
-  .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
-  /* Real photo background */
-  .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(.35) saturate(.6); transform: scale(1.04); animation: slowZoom 14s ease-in-out infinite alternate; }
-  @keyframes slowZoom { from { transform: scale(1.04); } to { transform: scale(1.12); } }
-  /* Dark gradient overlay — stronger at bottom */
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.15) 40%, rgba(8,8,8,0.7) 80%, rgba(8,8,8,1) 100%); }
-  /* Gold horizontal line accents */
-  .hero-line-top { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent); }
-  .hero-line-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.25), transparent); }
-  .hero-eyebrow { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; position: relative; display: flex; align-items: center; gap: 16px; }
-  .hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: .6; }
-  .hero-title { font-family: var(--ff-display); font-size: clamp(80px, 14vw, 180px); line-height: .88; letter-spacing: 8px; position: relative; }
-  .hero-title .outline { -webkit-text-stroke: 1.5px rgba(240,237,232,0.18); color: transparent; }
-  .hero-sub { margin-top: 32px; font-size: 15px; letter-spacing: 1.5px; color: rgba(240,237,232,0.65); max-width: 560px; position: relative; line-height: 1.9; }
-  /* Welcome label — large behind title */
-  .hero-welcome { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--ff-display); font-size: clamp(14px, 2vw, 22px); letter-spacing: 10px; text-transform: uppercase; color: rgba(201,168,76,0.12); white-space: nowrap; pointer-events: none; margin-top: -100px; }
-  .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
-  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
-  @keyframes scrollPulse { 0%,100%{opacity:.3;} 50%{opacity:1;} }
+/* HERO */
+.hero { height: 100vh; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.42) saturate(.7); animation: slowZoom 16s ease-in-out infinite alternate; }
+@keyframes slowZoom { from{transform:scale(1);} to{transform:scale(1.08);} }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,23,20,0.1) 0%, rgba(26,23,20,0.4) 60%, rgba(26,23,20,0.75) 100%); }
+.hero-line-top { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(212,171,69,0.5), transparent); }
+.hero-welcome { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--ff-display); font-size: clamp(16px,2.5vw,28px); letter-spacing: 12px; color: rgba(245,242,237,0.07); white-space: nowrap; pointer-events: none; margin-top: -120px; }
+.hero-eyebrow { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 24px; position: relative; display: flex; align-items: center; gap: 16px; z-index: 1; }
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold-lt); opacity: .7; }
+.hero-title { font-family: var(--ff-display); font-size: clamp(80px,14vw,180px); line-height: .88; letter-spacing: 8px; color: #F5F2ED; position: relative; z-index: 1; }
+.hero-title .outline { -webkit-text-stroke: 1.5px rgba(245,242,237,0.22); color: transparent; }
+.hero-sub { margin-top: 28px; font-size: 16px; letter-spacing: 1px; color: rgba(245,242,237,0.72); max-width: 580px; line-height: 1.85; position: relative; z-index: 1; }
+.scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; color: rgba(245,242,237,0.45); text-transform: uppercase; z-index: 1; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold-lt), transparent); animation: sp 2s ease-in-out infinite; }
+@keyframes sp { 0%,100%{opacity:.3;} 50%{opacity:1;} }
 
-  section { padding: 100px 48px; }
-  .section-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-  .section-title { font-family: var(--ff-display); font-size: clamp(42px, 6vw, 72px); letter-spacing: 3px; line-height: 1; margin-bottom: 48px; }
+/* SECTIONS */
+section { padding: 96px 56px; }
+.section-label { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.section-title { font-family: var(--ff-display); font-size: clamp(44px,6vw,76px); letter-spacing: 3px; line-height: 1; margin-bottom: 48px; color: var(--ink); }
 
-  /* Story */
-  .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .story-img { position: relative; aspect-ratio: 4/5; overflow: hidden; }
-  .story-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.7) saturate(.8); }
-  .story-img::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(201,168,76,0.2); pointer-events: none; }
-  .story-accent { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; border: 1px solid rgba(201,168,76,0.3); z-index: -1; }
-  .story-text p { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
-  .story-text strong { color: var(--white); font-weight: 500; }
-  .gold-line { width: 48px; height: 2px; background: var(--gold); margin-bottom: 28px; }
+/* STORY */
+.story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.story-img { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+.story-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.88) saturate(.85); }
+.story-img::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(184,146,42,0.25); pointer-events: none; }
+.story-accent { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; border: 1px solid rgba(184,146,42,0.2); z-index: -1; }
+.story-text p { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
+.story-text strong { color: var(--ink); font-weight: 500; }
+.gold-line { width: 48px; height: 2px; background: var(--gold); margin-bottom: 28px; }
 
-  /* Quote banner */
-  .quote-banner { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 48px; text-align: center; }
-  .quote-text { font-family: var(--ff-display); font-size: clamp(24px, 4vw, 42px); letter-spacing: 2px; line-height: 1.2; max-width: 900px; margin: 0 auto 20px; }
-  .quote-text span { color: var(--gold); }
-  .quote-sub { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+/* QUOTE */
+.quote-banner { background: var(--ink); padding: 72px 56px; text-align: center; }
+.quote-text { font-family: var(--ff-display); font-size: clamp(24px,4vw,44px); letter-spacing: 2px; line-height: 1.2; max-width: 900px; margin: 0 auto 20px; color: #F5F2ED; }
+.quote-text span { color: var(--gold-lt); }
+.quote-sub { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,242,237,0.4); }
 
-  /* Stats */
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .stat-item { background: var(--black); padding: 48px 40px; text-align: center; }
-  .stat-num { font-family: var(--ff-display); font-size: 72px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
-  .stat-label { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.stat-item { background: var(--bg); padding: 52px 40px; text-align: center; }
+.stat-num { font-family: var(--ff-display); font-size: 76px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
+.stat-label { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
 
-  /* Why us */
-  .why-section { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); }
-  .why-item { background: var(--dark); padding: 40px 32px; transition: background .25s; }
-  .why-item:hover { background: #161616; }
-  .why-icon { font-family: var(--ff-display); font-size: 40px; color: var(--gold); opacity: .5; margin-bottom: 16px; line-height: 1; }
-  .why-name { font-family: var(--ff-display); font-size: 24px; letter-spacing: 2px; margin-bottom: 10px; }
-  .why-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
+/* VALUES */
+.values-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1px; background: var(--border); }
+.value-item { background: var(--bg2); padding: 40px 32px; transition: background .25s; }
+.value-item:hover { background: var(--bg3); }
+.value-icon { font-size: 30px; margin-bottom: 16px; }
+.value-name { font-family: var(--ff-display); font-size: 28px; letter-spacing: 2px; margin-bottom: 10px; color: var(--ink); }
+.value-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
 
-  /* Team */
-  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
-  .team-card { position: relative; overflow: hidden; aspect-ratio: 3/4; background: var(--card); }
-  .team-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(.7); transition: transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s; }
-  .team-card:hover img { transform: scale(1.05); filter: brightness(.75) saturate(1); }
-  .team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,.95) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; }
-  .team-name { font-family: var(--ff-display); font-size: 24px; letter-spacing: 2px; margin-bottom: 4px; }
-  .team-role { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+/* WHY */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1px; background: var(--border); }
+.why-item { background: var(--bg); padding: 40px 32px; transition: background .25s; }
+.why-item:hover { background: var(--bg2); }
+.why-num { font-family: var(--ff-display); font-size: 44px; color: var(--gold); opacity: .35; line-height: 1; margin-bottom: 14px; }
+.why-name { font-family: var(--ff-display); font-size: 26px; letter-spacing: 2px; margin-bottom: 10px; color: var(--ink); }
+.why-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
 
-  /* CTA */
-  .cta-section { text-align: center; padding: 120px 48px; position: relative; overflow: hidden; }
-  .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%); }
-  .cta-title { font-family: var(--ff-display); font-size: clamp(52px, 8vw, 96px); letter-spacing: 4px; line-height: .95; margin-bottom: 28px; position: relative; }
-  .cta-sub { color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto 40px; position: relative; line-height: 1.8; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 12px; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--black); background: var(--gold); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+/* TEAM */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 2px; }
+.team-card { position: relative; overflow: hidden; aspect-ratio: 3/4; background: var(--bg3); }
+.team-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.75) saturate(.8); transition: transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s; }
+.team-card:hover img { transform: scale(1.05); filter: brightness(.88) saturate(1); }
+.team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,23,20,.92) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; }
+.team-name { font-family: var(--ff-display); font-size: 26px; letter-spacing: 2px; margin-bottom: 4px; color: #F5F2ED; }
+.team-role { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-lt); }
 
-  footer { border-top: 1px solid var(--border); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-  .footer-logo { font-family: var(--ff-display); font-size: 22px; letter-spacing: 4px; }
-  .footer-logo span { color: var(--gold); }
-  .footer-copy { font-size: 11px; color: var(--muted); font-family: var(--ff-mono); letter-spacing: 1px; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; font-family: var(--ff-mono); transition: color .2s; }
-  .footer-links a:hover { color: var(--gold); }
+/* CTA */
+.cta-section { text-align: center; padding: 120px 56px; background: var(--ink); }
+.cta-title { font-family: var(--ff-display); font-size: clamp(52px,8vw,96px); letter-spacing: 4px; line-height: .95; margin-bottom: 28px; color: #F5F2ED; }
+.cta-sub { color: rgba(245,242,237,0.55); font-size: 16px; max-width: 520px; margin: 0 auto 40px; line-height: 1.8; }
+.btn-primary { display: inline-flex; align-items: center; gap: 12px; font-family: var(--ff-mono); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #fff; background: var(--gold); border: none; padding: 18px 40px; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
+.btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
 
-  .fade-in { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+/* FOOTER */
+footer { background: var(--ink); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+.footer-logo { font-family: var(--ff-display); font-size: 24px; letter-spacing: 5px; color: #F5F2ED; }
+.footer-logo span { color: var(--gold-lt); }
+.footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,237,0.4); text-decoration: none; font-family: var(--ff-mono); transition: color .2s; }
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy { font-size: 12px; color: rgba(245,242,237,0.28); font-family: var(--ff-mono); letter-spacing: 1px; }
 
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; } .nav-links { display: none; }
-    section { padding: 72px 20px; }
-    .story-section { grid-template-columns: 1fr; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-    .quote-banner { padding: 48px 20px; }
-    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
-  }
+/* ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  section { padding: 72px 24px; }
+  .story-section { grid-template-columns: 1fr; gap: 40px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .quote-banner { padding: 56px 24px; }
+  .cta-section { padding: 80px 24px; }
+  footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  section { padding: 56px 16px; }
+  footer { padding: 32px 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="mainNav">
   <a href="index.html" class="nav-logo">ELLIE<span>.</span>MEDIA</a>
   <ul class="nav-links">
     <li><a href="about.html" class="active">About Us</a></li>
     <li><a href="index.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
+  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="mobileMenu">
+  <a href="about.html" class="active">About Us</a>
+  <a href="index.html">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
 
-<!-- HERO -->
 <section class="hero">
   <img class="hero-img" src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Luxury real estate interior">
   <div class="hero-overlay"></div>
   <div class="hero-line-top"></div>
-  <div class="hero-line-bot"></div>
   <div class="hero-welcome">WELCOME TO ELLIE MEDIA</div>
   <div class="hero-eyebrow">Who We Are</div>
-  <h1 class="hero-title">
-    <div>ELLIE</div>
-    <div class="outline">MEDIA</div>
-  </h1>
+  <h1 class="hero-title"><div>ELLIE</div><div class="outline">MEDIA</div></h1>
   <p class="hero-sub">The leading real estate video editing studio — headquartered in Vietnam, trusted by agents and photographers worldwide.</p>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- STORY -->
 <section>
   <div class="story-section fade-in">
     <div class="story-img">
-      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80" alt="ELLIE MEDIA Studio">
+      <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800" alt="ELLIE MEDIA Studio">
       <div class="story-accent"></div>
     </div>
     <div class="story-text">
@@ -162,129 +185,75 @@
       <div class="gold-line"></div>
       <p><strong>ELLIE MEDIA</strong> is a professional real estate video editing company headquartered in Vietnam, built to serve agents, photographers, and videographers across the globe.</p>
       <p>We understand what sells a property — light, movement, and emotion. Our team specializes in transforming raw footage into polished, cinematic property videos that capture attention, build trust, and drive results for your listings.</p>
-      <p>From luxury estates to residential listings, we deliver <strong>fast turnarounds, consistent quality, and 24/7 availability</strong> — because in real estate, timing is everything. We are here to help your business grow and thrive in a competitive market.</p>
+      <p>With over <strong>10,000+ completed projects</strong> and <strong>2,000+ satisfied clients</strong> worldwide, we are proud to be the trusted post-production partner for creators across the globe.</p>
     </div>
   </div>
 </section>
 
-<!-- QUOTE BANNER -->
 <div class="quote-banner fade-in">
   <div class="quote-text">"Your success is <span>our heartbeat.</span> We don't stop until you're 100% thrilled."</div>
   <div class="quote-sub">— The ELLIE MEDIA Promise</div>
 </div>
 
-<!-- STATS -->
 <div class="stats-row">
-  <div class="stat-item fade-in"><div class="stat-num">2K+</div><div class="stat-label">Satisfied Clients</div></div>
+  <div class="stat-item fade-in"><div class="stat-num">2K+</div><div class="stat-label">Happy Clients</div></div>
   <div class="stat-item fade-in"><div class="stat-num">10K+</div><div class="stat-label">Videos Edited</div></div>
   <div class="stat-item fade-in"><div class="stat-num">24/7</div><div class="stat-label">Available</div></div>
   <div class="stat-item fade-in"><div class="stat-num">48H</div><div class="stat-label">Max Delivery</div></div>
 </div>
 
-<!-- WHY US -->
-<section class="why-section">
+<section class="values-section">
   <div class="fade-in">
     <div class="section-label">Why Choose Us</div>
     <h2 class="section-title">WHAT MAKES US<br>DIFFERENT</h2>
   </div>
   <div class="why-grid">
-    <div class="why-item fade-in">
-      <div class="why-icon">01</div>
-      <div class="why-name">PROMPT DELIVERY</div>
-      <div class="why-desc">We guarantee delivery within 8–24 hours for standard edits. Your listings go live faster, and you never miss a deadline.</div>
-    </div>
-    <div class="why-item fade-in">
-      <div class="why-icon">02</div>
-      <div class="why-name">24/7 SERVICE</div>
-      <div class="why-desc">Our team operates around the clock across time zones. Send us footage any time — we'll be ready to edit.</div>
-    </div>
-    <div class="why-item fade-in">
-      <div class="why-icon">03</div>
-      <div class="why-name">DISTINCTIVENESS</div>
-      <div class="why-desc">Every property has a unique story. We craft edits with a cinematic eye that makes your listings stand out from the competition.</div>
-    </div>
-    <div class="why-item fade-in">
-      <div class="why-icon">04</div>
-      <div class="why-name">CONSISTENCY</div>
-      <div class="why-desc">Whether it's your first project or your five hundredth, you receive the same high standard of quality — every single time.</div>
-    </div>
-    <div class="why-item fade-in">
-      <div class="why-icon">05</div>
-      <div class="why-name">FREE REVISION</div>
-      <div class="why-desc">Your first revision is always on us. We work until you're completely satisfied with the final result.</div>
-    </div>
-    <div class="why-item fade-in">
-      <div class="why-icon">06</div>
-      <div class="why-name">FLEXIBLE PAYMENT</div>
-      <div class="why-desc">We accept PayPal and offer daily or weekly billing for returning clients — making the workflow as smooth as possible.</div>
-    </div>
+    <div class="why-item fade-in"><div class="why-num">01</div><div class="why-name">PROMPT DELIVERY</div><div class="why-desc">We guarantee delivery within 8–24 hours for standard edits. Your listings go live faster, and you never miss a deadline.</div></div>
+    <div class="why-item fade-in"><div class="why-num">02</div><div class="why-name">24/7 SERVICE</div><div class="why-desc">Our team operates around the clock across time zones. Send us footage any time — we'll be ready to edit.</div></div>
+    <div class="why-item fade-in"><div class="why-num">03</div><div class="why-name">DISTINCTIVENESS</div><div class="why-desc">Every property has a unique story. We craft edits with a cinematic eye that makes your listings stand out.</div></div>
+    <div class="why-item fade-in"><div class="why-num">04</div><div class="why-name">CONSISTENCY</div><div class="why-desc">Whether it's your first project or your five hundredth, you receive the same high standard of quality every time.</div></div>
+    <div class="why-item fade-in"><div class="why-num">05</div><div class="why-name">FREE REVISION</div><div class="why-desc">Your first revision is always on us. We work until you're completely satisfied with the final result.</div></div>
+    <div class="why-item fade-in"><div class="why-num">06</div><div class="why-name">FLEXIBLE PAYMENT</div><div class="why-desc">We accept PayPal and offer daily or weekly billing for returning clients — making the workflow smooth.</div></div>
   </div>
 </section>
 
-<!-- TEAM -->
 <section>
   <div class="fade-in">
     <div class="section-label">The People Behind the Edits</div>
     <h2 class="section-title">MEET THE<br>TEAM</h2>
   </div>
   <div class="team-grid">
-    <div class="team-card fade-in">
-      <img src="images/team1.jpg" alt="">
-      <div class="team-overlay">
-        <div class="team-name">ALEX NGUYEN</div>
-        <div class="team-role">Founder & Lead Editor</div>
-      </div>
-    </div>
-    <div class="team-card fade-in">
-      <img src="images/team2.jpg" alt="">
-      <div class="team-overlay">
-        <div class="team-name">DANIEL PHAM</div>
-        <div class="team-role">Senior Editor</div>
-      </div>
-    </div>
-    <div class="team-card fade-in">
-      <img src="images/team3.jpg" alt="">
-      <div class="team-overlay">
-        <div class="team-name">JAMES TRAN</div>
-        <div class="team-role">Senior Colorist</div>
-      </div>
-    </div>
-    <div class="team-card fade-in">
-      <img src="images/team4.jpg" alt="">
-      <div class="team-overlay">
-        <div class="team-name">SOPHIA JENSY</div>
-        <div class="team-role">Lead Sale</div>
-      </div>
-    </div>
+    <div class="team-card fade-in"><img src="images/team1.jpg" alt="Alex Nguyen"><div class="team-overlay"><div class="team-name">ALEX NGUYEN</div><div class="team-role">Founder & Lead Editor</div></div></div>
+    <div class="team-card fade-in"><img src="images/team2.jpg" alt="Daniel Pham"><div class="team-overlay"><div class="team-name">DANIEL PHAM</div><div class="team-role">Senior Editor</div></div></div>
+    <div class="team-card fade-in"><img src="images/team3.jpg" alt="James Tran"><div class="team-overlay"><div class="team-name">JAMES TRAN</div><div class="team-role">Senior Colorist</div></div></div>
+    <div class="team-card fade-in"><img src="images/team4.jpg" alt="Sophia Jensy"><div class="team-overlay"><div class="team-name">SOPHIA JENSY</div><div class="team-role">Lead Sale</div></div></div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
-  <div class="cta-bg"></div>
   <div class="fade-in">
-    <h2 class="cta-title">READY TO<br>WORK WITH US?</h2>
-    <p class="cta-sub">Trusted by real estate professionals worldwide. Send us your footage today and see the difference quality editing makes for your listings.</p>
-    <a href="contact.html" class="btn-primary">Get in Touch →</a>
+    <h2 class="cta-title">READY TO<br>COLLABORATE?</h2>
+    <p class="cta-sub">Let us turn your property footage into a film worth remembering.</p>
+    <a href="contact.html" class="btn-primary">Get in Touch <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">ELLIE<span>.</span>MEDIA</div>
   <div class="footer-links">
-    <a href="about.html">About</a>
+    <a href="about.html">About Us</a>
     <a href="index.html">Services</a>
-    
     <a href="contact.html">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 ELLIE MEDIA Co., Ltd.</div>
+  <div class="footer-copy">© 2022 Ellie Media Co., Ltd.</div>
 </footer>
 
 <script>
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  window.addEventListener("scroll",()=>{document.getElementById("mainNav").classList.toggle("scrolled",window.scrollY>20);});
+  function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("open");}
+  document.addEventListener("click",e=>{if(!e.target.closest("nav")&&!e.target.closest(".nav-mobile"))document.getElementById("mobileMenu").classList.remove("open");});
+  const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add("visible"),i*80);obs.unobserve(e.target);}});},{threshold:0.08,rootMargin:"0px 0px -48px 0px"});
+  document.querySelectorAll(".fade-in").forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
