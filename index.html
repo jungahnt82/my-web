@@ -58,14 +58,26 @@ section { padding: 96px 56px; }
 .section-title { font-family: var(--ff-display); font-size: clamp(44px,6vw,76px); letter-spacing: 3px; line-height: 1; margin-bottom: 48px; color: var(--ink); }
 
 /* FILTER BAR */
-.filter-bar { display: flex; gap: 4px; margin-bottom: 48px; border-bottom: 2px solid var(--border); }
+.filter-bar { display: flex; gap: 4px; margin-bottom: 48px; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
 .filter-btn { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: none; border: none; padding: 12px 22px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
 .filter-btn:hover { color: var(--ink); }
 .filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-/* SERVICE CARDS */
+/* SERVICE CARDS — horizontal 16:10 */
 .cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; width: 100%; }
 .service-card { position: relative; overflow: hidden; aspect-ratio: 16/10; cursor: pointer; background: var(--bg3); }
+
+/* REELS CARDS — vertical 9:16, 3 per row */
+.reels-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; width: 100%; margin-top: 3px; }
+.reels-card { position: relative; overflow: hidden; aspect-ratio: 9/16; cursor: pointer; background: var(--bg3); }
+.reels-card .card-video-bg iframe { position: absolute; top: 50%; left: 50%; width: 300%; height: 300%; transform: translate(-50%,-50%); border: none; filter: brightness(.55) saturate(.8); transition: filter .5s; }
+.reels-card:hover .card-video-bg iframe { filter: brightness(.72) saturate(1); }
+.reels-card .card-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; border-radius: 50%; background: rgba(184,146,42,0.88); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; opacity: 0; transition: opacity .3s, transform .2s; }
+.reels-card:hover .card-play-btn { opacity: 1; }
+.reels-card .card-play-btn:hover { transform: translate(-50%,-50%) scale(1.12); background: var(--gold); }
+.reels-card .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,23,20,.92) 0%, rgba(26,23,20,.2) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; transition: background .4s; }
+.reels-card:hover .card-overlay { background: linear-gradient(to top, rgba(26,23,20,.97) 0%, rgba(26,23,20,.5) 65%, transparent 100%); }
+
 .card-video-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .card-video-bg iframe { position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; transform: translate(-50%,-50%); border: none; filter: brightness(.55) saturate(.8); transition: filter .5s; }
 .service-card:hover .card-video-bg iframe { filter: brightness(.72) saturate(1); }
@@ -77,13 +89,15 @@ section { padding: 96px 56px; }
 .card-tag { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 8px; }
 .card-title { font-family: var(--ff-display); font-size: 32px; letter-spacing: 2px; line-height: 1; margin-bottom: 16px; color: #F5F2ED; }
 .card-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #F5F2ED; background: none; border: 1px solid rgba(245,242,237,0.3); padding: 10px 20px; cursor: pointer; text-decoration: none; width: fit-content; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s, background .25s, border-color .25s; }
-.service-card:hover .card-btn { opacity: 1; transform: translateY(0); }
+.service-card:hover .card-btn, .reels-card:hover .card-btn { opacity: 1; transform: translateY(0); }
 .card-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
 
-/* VIDEO MODAL */
+/* VIDEO MODAL — supports both 16:9 and 9:16 */
 .yt-modal-backdrop { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(26,23,20,0.94); align-items: center; justify-content: center; }
 .yt-modal-backdrop.open { display: flex; }
-.yt-modal { position: relative; width: 92vw; max-width: 1040px; aspect-ratio: 16/9; background: #000; }
+.yt-modal { position: relative; background: #000; }
+.yt-modal.landscape { width: 92vw; max-width: 1040px; aspect-ratio: 16/9; }
+.yt-modal.portrait { height: 88vh; max-height: 780px; aspect-ratio: 9/16; }
 .yt-modal iframe { width: 100%; height: 100%; border: none; }
 .yt-modal-close { position: absolute; top: -46px; right: 0; font-family: var(--ff-mono); font-size: 12px; letter-spacing: 2px; color: rgba(245,242,237,0.6); background: none; border: none; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color .2s; }
 .yt-modal-close:hover { color: var(--gold-lt); }
@@ -147,8 +161,10 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   .cta-section { padding: 80px 24px; }
   footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
   .cards-grid { grid-template-columns: 1fr; }
+  .reels-grid { grid-template-columns: 1fr; }
   .service-card { aspect-ratio: 16/9; }
-  .card-play-btn { opacity: 1; }
+  .reels-card { aspect-ratio: 9/16; max-width: 360px; margin: 0 auto; }
+  .card-play-btn, .reels-card .card-play-btn { opacity: 1; }
   .card-btn { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 480px) {
@@ -196,13 +212,17 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   </div>
   <div class="filter-bar fade-in">
     <button class="filter-btn active" onclick="filterCards('all',this)">All Services</button>
+    <button class="filter-btn" onclick="filterCards('landscape',this)">Video (16:9)</button>
+    <button class="filter-btn" onclick="filterCards('reels',this)">Reels (9:16)</button>
   </div>
+
+  <!-- 16:9 VIDEO CARDS -->
   <div class="cards-grid" id="cardsGrid">
-    <div class="service-card fade-in" data-category="video">
+    <div class="service-card fade-in" data-category="landscape">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/oJ46C5eqNpo?autoplay=1&mute=1&loop=1&playlist=oJ46C5eqNpo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
       </div>
-      <div class="card-play-btn" onclick="openModal('oJ46C5eqNpo')">
+      <div class="card-play-btn" onclick="openModal('oJ46C5eqNpo','landscape')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -211,11 +231,11 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-    <div class="service-card fade-in" data-category="video">
+    <div class="service-card fade-in" data-category="landscape">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/QPuhbXF5DRM?autoplay=1&mute=1&loop=1&playlist=QPuhbXF5DRM&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
       </div>
-      <div class="card-play-btn" onclick="openModal('QPuhbXF5DRM')">
+      <div class="card-play-btn" onclick="openModal('QPuhbXF5DRM','landscape')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -224,16 +244,59 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-    <div class="service-card fade-in" data-category="video">
+    <div class="service-card fade-in" data-category="landscape">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/jEX2y0xW57w?autoplay=1&mute=1&loop=1&playlist=jEX2y0xW57w&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
       </div>
-      <div class="card-play-btn" onclick="openModal('jEX2y0xW57w')">
+      <div class="card-play-btn" onclick="openModal('jEX2y0xW57w','landscape')">
         <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
         <div class="card-tag">Video Editing</div>
         <div class="card-title">LUXURY VIDEO</div>
+        <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9:16 REELS CARDS -->
+  <div class="reels-grid" id="reelsGrid">
+    <div class="reels-card fade-in" data-category="reels">
+      <div class="card-video-bg">
+        <iframe src="https://www.youtube.com/embed/wIZSION4_bs?autoplay=1&mute=1&loop=1&playlist=wIZSION4_bs&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+      </div>
+      <div class="card-play-btn" onclick="openModal('wIZSION4_bs','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-overlay">
+        <div class="card-tag">Reels Editing</div>
+        <div class="card-title">BASIC STYLE</div>
+        <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="reels-card fade-in" data-category="reels">
+      <div class="card-video-bg">
+        <iframe src="https://www.youtube.com/embed/DleGmOd0dbg?autoplay=1&mute=1&loop=1&playlist=DleGmOd0dbg&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+      </div>
+      <div class="card-play-btn" onclick="openModal('DleGmOd0dbg','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-overlay">
+        <div class="card-tag">Reels Editing</div>
+        <div class="card-title">3D TEXT STYLE</div>
+        <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="reels-card fade-in" data-category="reels">
+      <div class="card-video-bg">
+        <iframe src="https://www.youtube.com/embed/wIZSION4_bs?autoplay=1&mute=1&loop=1&playlist=wIZSION4_bs&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+      </div>
+      <div class="card-play-btn" onclick="openModal('wIZSION4_bs','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-overlay">
+        <div class="card-tag">Reels Editing</div>
+        <div class="card-title">AI STYLE</div>
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
@@ -325,11 +388,14 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   function filterCards(cat,btn) {
     document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
-    document.querySelectorAll(".service-card").forEach(card=>{
-      card.style.display=(cat==="all"||card.dataset.category===cat)?"block":"none";
-    });
+    const showLandscape = cat==="all"||cat==="landscape";
+    const showReels = cat==="all"||cat==="reels";
+    document.getElementById("cardsGrid").style.display = showLandscape ? "grid" : "none";
+    document.getElementById("reelsGrid").style.display = showReels ? "grid" : "none";
   }
-  function openModal(id) {
+  function openModal(id, orientation) {
+    const modal = document.getElementById("ytModalInner");
+    modal.className = "yt-modal " + (orientation||"landscape");
     document.getElementById("ytModalIframe").src="https://www.youtube.com/embed/"+id+"?autoplay=1&rel=0&modestbranding=1";
     document.getElementById("ytModal").classList.add("open");
     document.body.style.overflow="hidden";
