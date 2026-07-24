@@ -166,7 +166,13 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   .reels-card { aspect-ratio: 9/16; max-width: 360px; margin: 0 auto; }
   .card-play-btn, .reels-card .card-play-btn { opacity: 1; }
   .card-btn { opacity: 1; transform: translateY(0); }
+  .embed-fallback .card-video-bg iframe { display: none; }
+  .embed-fallback .mobile-thumb-img { display: block; }
+  .embed-fallback .play-desktop { display: none; }
+  .embed-fallback .play-mobile { display: flex; opacity: 1; }
 }
+.embed-fallback .mobile-thumb-img { display: none; }
+.embed-fallback .play-mobile { display: none; }
 @media (max-width: 480px) {
   section { padding: 56px 16px; }
   footer { padding: 32px 16px; }
@@ -261,11 +267,15 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
 
   <!-- 9:16 REELS CARDS -->
   <div class="reels-grid" id="reelsGrid">
-    <div class="reels-card fade-in" data-category="reels">
+    <div class="reels-card fade-in embed-fallback" data-category="reels">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/KWgmaDdZSxc?autoplay=1&mute=1&loop=1&playlist=KWgmaDdZSxc&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <img class="mobile-thumb-img" src="https://img.youtube.com/vi/KWgmaDdZSxc/hqdefault.jpg" alt="Basic Style Reels Editing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
-      <div class="card-play-btn" onclick="openModal('KWgmaDdZSxc','portrait')">
+      <div class="card-play-btn play-desktop" onclick="openModal('KWgmaDdZSxc','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-play-btn play-mobile" onclick="window.open('https://www.youtube.com/shorts/KWgmaDdZSxc','_blank')">
         <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -274,11 +284,15 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-    <div class="reels-card fade-in" data-category="reels">
+    <div class="reels-card fade-in embed-fallback" data-category="reels">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/DleGmOd0dbg?autoplay=1&mute=1&loop=1&playlist=DleGmOd0dbg&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <img class="mobile-thumb-img" src="https://img.youtube.com/vi/DleGmOd0dbg/hqdefault.jpg" alt="3D Text Style Reels Editing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
-      <div class="card-play-btn" onclick="openModal('DleGmOd0dbg','portrait')">
+      <div class="card-play-btn play-desktop" onclick="openModal('DleGmOd0dbg','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-play-btn play-mobile" onclick="window.open('https://www.youtube.com/shorts/DleGmOd0dbg','_blank')">
         <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
@@ -287,11 +301,15 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <a href="contact.html" class="card-btn">Order Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-    <div class="reels-card fade-in" data-category="reels">
+    <div class="reels-card fade-in embed-fallback" data-category="reels">
       <div class="card-video-bg">
         <iframe src="https://www.youtube.com/embed/wIZSION4_bs?autoplay=1&mute=1&loop=1&playlist=wIZSION4_bs&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+        <img class="mobile-thumb-img" src="https://img.youtube.com/vi/wIZSION4_bs/hqdefault.jpg" alt="AI Style Reels Editing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
-      <div class="card-play-btn" onclick="openModal('wIZSION4_bs','portrait')">
+      <div class="card-play-btn play-desktop" onclick="openModal('wIZSION4_bs','portrait')">
+        <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="card-play-btn play-mobile" onclick="window.open('https://www.youtube.com/shorts/wIZSION4_bs','_blank')">
         <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="card-overlay">
